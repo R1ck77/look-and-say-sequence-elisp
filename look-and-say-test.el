@@ -14,9 +14,3 @@
     (expect (las-next-element "111221")
             :to-equal  "312211")))
 
-(defun quick-test (&optional seed limit)
-  (let ((current (or (format "%s" seed) "1"))
-        (stop-regexp (regexp-quote (or (format "%s" limit) "3"))))
-    (while (not (string-match-p stop-regexp current))
-      (setq current (las-next-element current))
-      (insert (format "%d: %s\n" (length current) current)))))

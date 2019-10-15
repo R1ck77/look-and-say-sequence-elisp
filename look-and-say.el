@@ -51,4 +51,22 @@ Accepts and returns strings."
            (reverse
             (lne--process numbers-list)))))
 
+(defun las--print-and-wait (text)
+  (message text)
+  (sit-for 0))
+
+(defun las--insert (text)
+  (insert text)
+  (insert "\n"))
+
+(defun las--format-output (number-string)
+  (format "%d: %s" (length number-string) number-string))
+
+(defun print-sequence (condition &optional seed print-function)
+  (let ((current (or seed  "1"))
+        (print-function (or print-function 'las--insert)))
+    (while (funcall condition current)
+      (funcall print-function (las--format-output current))
+      (setq current (las-next-element current)))))
+
 (provide 'look-and-say)
